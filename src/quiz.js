@@ -37,11 +37,7 @@ class Quiz {
 
   // 6. hasEnded()
   hasEnded() {
-    if (this.currentQuestionIndex === Quiz.length) {
-      return true;
-    } else {
-      return false;
-    }
+    return this.currentQuestionIndex === this.questions.length;
   }
   averageDifficulty() {
     const aveDifficulty = this.questions.reduce((accumulator, question) => {

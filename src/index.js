@@ -44,6 +44,23 @@ document.addEventListener("DOMContentLoaded", () => {
       3
     ),
     // Add more questions here
+    new Question(
+      "Quel est le sens de la vie ?",
+      ["Par là", "à droite", "42", "je sais pas"],
+      "42",
+      4
+    ),
+    new Question(
+      "Pourquoi le prof est d'abord allé voir l'autre équipe?",
+      [
+        "C'était plus pertinent",
+        "Le prof a vu leur main levé",
+        "Guillaume est un mauvais négociateur",
+        "Marie n'a pas tout essayé",
+      ],
+      "Guillaume est un mauvais négociateur",
+      1
+    ),
   ];
   const quizDuration = 120; // 120 seconds (2 minutes)
 
@@ -71,7 +88,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /************  TIMER  ************/
 
-  let timer;
+  let timer = setInterval(() => {
+    quiz.timeRemaining--;
+    timeRemainingContainer.textContent = `${Math.floor(quiz.timeRemaining / 60)
+      .toString()
+      .padStart(2, "0")}:${(quiz.timeRemaining % 60)
+      .toString()
+      .padStart(2, "0")}`;
+    if (quiz.timeRemaining <= 0) {
+      clearInterval(timer);
+      showResults();
+    }
+  }, 1000);
 
   /************  EVENT LISTENERS  ************/
 
@@ -84,6 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // showResults() - Displays the end view and the quiz results
 
   function showQuestion() {
+    console.log("hello, quiz current question", quiz.currentQuestionIndex);
     // If the quiz has ended, show the results
     if (quiz.hasEnded()) {
       showResults();
@@ -197,6 +226,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // 3. Update the result container (div#result) inner text to show the number of correct answers out of total questions
     //resultContainer.innerText = `You scored 1 out of 1 correct answers!`; // This value is hardcoded as a placeholder
     resultContainer.innerText = `You scored ${quiz.correctAnswers} sur ${quiz.questions.length} correct answers!`;
+    clearInterval(timer);
   }
 
   //Restart Button of doom
