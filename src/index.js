@@ -200,16 +200,15 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   //Restart Button of doom
-  /* const restartButton = document.getElementById("restartButton");
-  restartButton.addEventListener('click', restartQuiz);
-  function restartQuiz ()(
+  const restartButton = document.getElementById("restartButton");
+  restartButton.addEventListener("click", restartQuiz);
+  function restartQuiz() {
     const endView = document.getElementById("endView");
     endView.style.display = "none";
 
     const resultProgress = document.getElementById("result-progress");
-    resultProgress.style.display = "block"
+    resultProgress.style.display = "block";
 
-    quiz.currentQuestionIndex
-  )
-  */
+    window.location.reload(true);
+  }
 });
